@@ -11,6 +11,7 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'Inventory@create');
+
+Route::get('/create', 'Inventory@create');
+Route::post('/create', 'Inventory@store');
