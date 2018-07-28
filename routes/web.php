@@ -15,3 +15,5 @@ Route::get('/', 'Inventory@create');
 
 Route::get('/create', 'Inventory@create');
 Route::post('/create', 'Inventory@store');
+
+Route::delete('/delete/{id}', 'Inventory@delete');

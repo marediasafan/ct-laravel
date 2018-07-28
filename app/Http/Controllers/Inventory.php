@@ -47,7 +47,9 @@ class Inventory extends Controller
         $inventoryData = Storage::disk('local')->exists('inventory.json') ? json_decode(Storage::disk('local')->get('inventory.json')) : [];
 
         // store validated form data as JSON or XML
+        $id = !empty($inventoryData) && is_array($inventoryData) ? end($inventoryData)->id + 1 : 1;
         $formData = [
+            'id' => $id,
             'product_name' => $request->get('product_name'),
             'quantity' => $request->get('quantity'),
             'price_per_item' => $request->get('price_per_item'),
@@ -55,6 +57,26 @@ class Inventory extends Controller
         ];
 
         array_push($inventoryData, $formData);
+
+        Storage::disk('local')->put('inventory.json', json_encode($inventoryData));
+
+        return Redirect::to('create');
+    }
+
+    public function delete($id)
+    {
+        if (empty($id)) {
+            return Redirect::to('create');
+        }
+
+        // fetch existing json file if it exists
+        $inventoryData = Storage::disk('local')->exists('inventory.json') ? json_decode(Storage::disk('local')->get('inventory.json')) : [];
+
+        // unset item based on requested delete id
+        foreach($inventoryData as $key => $item) {
+            if ($item->id == $id)
+                unset($inventoryData[$key]);
+        }
 
         Storage::disk('local')->put('inventory.json', json_encode($inventoryData));
 

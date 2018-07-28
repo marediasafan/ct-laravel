@@ -49,27 +49,36 @@
     <table class="table table-striped">
         <thead>
         <tr>
+            <th scope="col">#</th>
             <th scope="col">Product Name</th>
             <th scope="col">Quantity</th>
             <th scope="col">Price Per Item</th>
             <th scope="col">Created At</th>
             <th scope="col">Total Value</th>
+            <th scope="col">Action</th>
         </tr>
         </thead>
         <tbody>
         @foreach ($inventory_data as $item)
             <tr>
+                <td>{{ $item->id }}</td>
                 <td>{{ $item->product_name }}</td>
                 <td>{{ $item->quantity }}</td>
                 <td>${{ number_format($item->price_per_item, 2, '.',',') }}</td>
                 <td>{{ $item->created_at }}</td>
                 <td>${{ number_format($item->quantity * $item->price_per_item, 2, '.', ',') }}</td>
+                <td>
+                    {{ Form::open(array('url' => 'delete/' . $item->id)) }}
+                    {{ Form::hidden('_method', 'DELETE') }}
+                    {{ Form::submit('Delete this Item?', array('class' => 'btn btn-danger')) }}
+                    {{ Form::close() }}
+                </td>
             </tr>
         @endforeach
 
         <tr>
-            <td colspan="4" align="right">Total Value </td>
-            <td>${{ number_format($total, 2, '.', ',') }}</td>
+            <td colspan="5" align="right">Total Value </td>
+            <td colspan="2">${{ number_format($total, 2, '.', ',') }}</td>
         </tr>
         </tbody>
     </table>

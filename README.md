@@ -36,4 +36,4 @@ Run DB migrate script if planning to use MySQL for storing data
 
 *** Screenshots ***
 
-![Stock Management](https://preview.ibb.co/mQWPw8/stock_management.png)
+![Stock Management](https://preview.ibb.co/jOM7Yo/inventory_management.png)
