@@ -1,5 +1,9 @@
 # Laravel - Inventory Management
 
+Software Requirement:
+- Laravel 5.6
+- PHP >= 7.1.3
+
 Web form page that will show a form with fields:
 
 - Product Name 
